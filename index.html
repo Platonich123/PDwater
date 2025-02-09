@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoSpot</title>
+    <link rel="stylesheet" href="styleG.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="container">
+                <div class="header-left">
+                    <a href="index.html"><img src="card/logo.png" alt="GoSpot Logo" class="logo"></a>
+                </div>
+                <nav class="main-menu">
+                    <ul>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="blog.html">Блог</a></li>
+                        <li><a href="#">Магазин</a></li>
+                        <li><a href="help.html">Помощь</a></li>
+                        <li><a href="#">Избранное</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right">
+                    <a href="#" class="button">Для бизнеса</a>
+                    <button id="login-button" class="button">Войти</button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <section class="hero">
+                    <div class="hero-background">
+                        <img src="card/угабуга.jpg" alt="Hero Image">
+                        <div class="hero-content">
+                            <h2>Ищешь спот?</h2>
+                            <h1>Тебе на GoSpot!</h1>
+                        </div>
+                    </div>
+                    <p class="blue-text">Яхтинг, серфинг, плавание — на нашем сайте ты найдешь водный спорт себе по душе и узнаешь, где им можно заняться в твоем городе!</p>
+                    <div class="hero-buttons">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Поиск...">
+                            <a href="poisk.html" class="search-button">Найти</a>
+                            <a href="poisk.html" class="button">Все категории</a>
+                        </div>
+                    </div>
+                </section>
+                <section class="categories">
+                    <p class="centered-text">
+                        <span class="gospot-blue">GoSpot</span> - единый интернет-портал для поиска мест для занятий водными видами спорта, помогающий отыскать каждому то, что он хочет - будь то круиз выходного дня на яхте, корпоратив на сапах или просто тренировки в бассейне. И еще ного текста о компании и о том, что здесь есть на сайте
+                    </p>
+                    <h2 class="category-title">Популярные виды спорта</h2>
+                    <div class="category-grid" id="category-grid">
+                        <div class="category-item">
+                            <img src="card/swimming.jpg" alt="Swimming">
+                            <p>Плавание</p>
+                        </div>
+                        <div class="category-item">
+                            <img src="card/surfing.jpg" alt="Surfing">
+                            <p>Серфинг</p>
+                        </div>
+                        <div class="category-item">
+                            <img src="card/dive.jpg" alt="Diving">
+                            <p>Дайвинг</p>
+                        </div>
+                        <div class="category-item">
+                            <img src="card/yaht.png" alt="Yachting">
+                            <p>Яхтинг</p>
+                        </div>
+                        <div class="category-item hidden">
+                            <img src="card/veikbord.jpg" alt="Wakeboarding">
+                            <p>Вейкбординг</p>
+                        </div>
+                        <div class="category-item hidden">
+                            <img src="card/saprbord.jpg" alt="Sapboard">
+                            <p>Сапборд</p>
+                        </div>
+                        <div class="category-item hidden">
+                            <img src="card/flybord.jpg" alt="Flyboard">
+                            <p>Флайбординг</p>
+                        </div>
+                        <div class="category-item hidden">
+                            <img src="card/kaitserf.jpg" alt="Kitesurfing">
+                            <p>Кайтсерфинг</p>
+                        </div>
+                    </div>
+                    <button id="show-more-button" class="show-more-button">Показать еще <span>&#9660;</span></button>
+                </section>
+            </div>
+        </main>
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <p>&copy; 2023 GoSpot. Все права защищены.</p>
+                    </div>
+                    <div class="footer-section mobile-app">
+                        <h3>Мобильное приложение</h3>
+                        <p>В приложении ещё удобнее искать споты и узнавать о новых мероприятиях! Скачайте его и добавьте GoSpot на главный экран своего устройства даже если нет интернета.</p>
+                        <div class="app-links">
+                            <a href="#"><img src="card\QR_code.jpg" alt="QR Code"></a>
+                            <a href="#"><img src="card\play.jpg" alt="Google Play"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Модальное окно входа -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>GoSpot</h2>
+            <h3>Вход</h3>
+            <form>
+                <input type="text" placeholder="Логин" required>
+                <input type="password" placeholder="Пароль" required>
+                <button type="submit">Войти</button>
+            </form>
+            <p>Нет аккаунта? <a href="#" id="register-link">Зарегистрируйтесь</a></p>
+        </div>
+    </div>
+
+    <!-- Модальное окно регистрации -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>GoSpot</h2>
+            <h3>Регистрация</h3>
+            <form>
+                <input type="text" placeholder="Логин" required>
+                <input type="password" placeholder="Пароль" required>
+                <input type="password" placeholder="Пароль еще раз" required>
+                <button type="submit">Регистрация</button>
+            </form>
+            <p>Вы зарегистрированы? <a href="#" id="login-link">Войдите</a></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+</body>
+</html>
