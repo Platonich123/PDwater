@@ -35,10 +35,10 @@ header .container {
 }
 
 .header-left img.logo {
-    max-height: 70px; /* Максимальная высота изображения */
-    width: auto; /* Ширина будет автоматически подстраиваться */
+    max-height: 70px;
+    width: auto;
     height: auto;
-    margin-right: -220px; /* Отступ слева */
+    margin-right: -220px;
 }
 
 .main-menu ul {
@@ -144,7 +144,7 @@ main {
 .hero p {
     font-size: 18px;
     margin-bottom: 20px;
-    margin-top: 40px; /* Увеличенный отступ от картинки */
+    margin-top: 40px;
 }
 
 .hero-buttons {
@@ -154,70 +154,41 @@ main {
     margin-top: 20px;
 }
 
-.hero-buttons .button {
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    padding: 8px 16px; /* Уменьшенные размеры кнопки */
-    cursor: pointer;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 12px; /* Уменьшенный размер шрифта */
-}
-
-.hero-buttons .button:hover {
-    background-color: #004494;
-}
-
 .search-bar {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 20px;
     width: 100%;
 }
 
 .search-bar input {
-    width: 100%;
-    padding: 6px;
+    flex: 1;
+    padding: 8px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
 
-.search-bar .search-button {
-    background-color: transparent; /* Прозрачный фон */
-    color: #0056b3; /* Синий цвет текста */
-    border: 1px solid #0056b3; /* Синий бордер */
-    padding: 8px 16px; /* Уменьшенные размеры кнопки */
-    cursor: pointer;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 12px; /* Уменьшенный размер шрифта */
-    font-weight: 900;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход цвета */
-}
-
-.search-bar .search-button:hover {
-    background-color: #004494;
-    color: white; /* Белый цвет текста при наведении */
-}
-
+.search-bar .search-button,
 .search-bar .button {
-    background-color: transparent; /* Прозрачный фон */
-    color: #0056b3; /* Синий цвет текста */
-    border: 1px solid #0056b3; /* Синий бордер */
-    padding: 8px 16px; /* Уменьшенные размеры кнопки */
+    background-color: transparent;
+    color: #0056b3;
+    border: 1px solid #0056b3;
+    padding: 8px 16px;
     cursor: pointer;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 9px; /* Уменьшенный размер шрифта */
+    font-size: 12px;
     font-weight: 900;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход цвета */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: auto;
+    text-align: center;
+    display: inline-block;
 }
 
+.search-bar .search-button:hover,
 .search-bar .button:hover {
-    background-color: #0056b3; /* Синий фон при наведении */
-    color: white; /* Белый цвет текста при наведении */
+    background-color: #004494;
+    color: white;
 }
 
 .categories {
@@ -229,7 +200,7 @@ main {
     font-weight: 700;
     margin-bottom: 20px;
     text-align: center;
-    color: #0056b3; /* Синий цвет для заголовка */
+    color: #0056b3;
 }
 
 .category-grid {
@@ -255,7 +226,7 @@ main {
 
 .category-item img {
     width: 100%;
-    height: 200px; /* Fixed height for all images */
+    height: 200px;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -372,7 +343,6 @@ footer {
     }
 }
 
-/* Добавляем стили для модального окна */
 .modal {
     display: none;
     position: fixed;
@@ -474,5 +444,5 @@ footer {
     color: #0056b3;
     font-size: 18px;
     margin-bottom: 20px;
-    margin-top: 40px; /* Увеличенный отступ от картинки */
+    margin-top: 40px;
 }
