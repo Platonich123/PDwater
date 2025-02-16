@@ -40,55 +40,268 @@
                         </div>
                     </div>
                     <p class="blue-text">Яхтинг, серфинг, плавание — на нашем сайте ты найдешь водный спорт себе по душе и узнаешь, где им можно заняться в твоем городе!</p>
-                    <div class="hero-buttons">
-                        <div class="search-bar">
-                            <input type="text" placeholder="Поиск...">
-                            <a href="poisk.html" class="search-button">Найти</a>
-                            <a href="poisk.html" class="button">Все категории</a>
+                </section>
+
+                <!-- Поисковая строка -->
+                <section class="search-bar">
+                    <div class="container">
+                        <div class="search-wrapper">
+                            <input type="text" class="search-input" placeholder="Поиск по локации, активности и т.д." id="search-input">
+                            <button class="search-button" id="search-button">Поиск</button>
                         </div>
                     </div>
                 </section>
-                <section class="categories">
-                    <p class="centered-text">
-                        <span class="gospot-blue">GoSpot</span> - единый интернет-портал для поиска мест для занятий водными видами спорта, помогающий отыскать каждому то, что он хочет - будь то круиз выходного дня на яхте, корпоратив на сапах или просто тренировки в бассейне. И еще ного текста о компании и о том, что здесь есть на сайте
-                    </p>
-                    <h2 class="category-title">Популярные виды спорта</h2>
-                    <div class="category-grid" id="category-grid">
-                        <div class="category-item">
-                            <img src="card/swimming.jpg" alt="Swimming">
-                            <p>Плавание</p>
+
+                <!-- Фильтры и результаты поиска -->
+                <div class="sort-buttons">
+                    <input type="radio" id="popular" name="sort" checked>
+                    <label for="popular" class="sort-button">Популярное</label>
+                    <input type="radio" id="rating" name="sort">
+                    <label for="rating" class="sort-button">По рейтингу</label>
+                </div>
+                <div class="filters-and-results">
+                    <section class="filters">
+                        <div class="filter-group">
+                            <h3>Группы спорта</h3>
+                            <div class="checkboxes-container">
+                                <label>
+                                    <input type="checkbox" name="filter" value="моторная тяга">
+                                    Моторная тяга
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="filter" value="яхта">
+                                    Яхта
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="filter" value="ветер">
+                                    Ветер
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="filter" value="весло">
+                                    Весло
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="filter" value="специальное оборудование">
+                                    Специальное оборудование
+                                </label>
+                            </div>
                         </div>
-                        <div class="category-item">
-                            <img src="card/surfing.jpg" alt="Surfing">
-                            <p>Серфинг</p>
+                        <div class="filter-group">
+                            <h3>Местоположение</h3>
+                            <input type="text" placeholder="Москва">
                         </div>
-                        <div class="category-item">
-                            <img src="card/dive.jpg" alt="Diving">
-                            <p>Дайвинг</p>
+                        <div class="filter-group">
+                            <h3>Удобства</h3>
+                            <label>
+                                <input type="checkbox" name="amenity" value="есть инвентарь">
+                                Есть инвентарь
+                            </label>
+                            <label>
+                                <input type="checkbox" name="amenity" value="Можно детям">
+                                Можно детям
+                            </label>
+                            <label>
+                                <input type="checkbox" name="amenity" value="инструктор">
+                                Инструктор
+                            </label>
                         </div>
-                        <div class="category-item">
-                            <img src="card/yaht.png" alt="Yachting">
-                            <p>Яхтинг</p>
+                        <div class="filter-group">
+                            <h3>Инструктор</h3>
+                            <input type="text" placeholder="Введите имя инструктора">
                         </div>
-                        <div class="category-item hidden">
-                            <img src="card/veikbord.jpg" alt="Wakeboarding">
-                            <p>Вейкбординг</p>
+                        <div class="filter-group">
+                            <h3>Школа/Секция</h3>
+                            <input type="text" placeholder="Введите название школы или секции">
                         </div>
-                        <div class="category-item hidden">
-                            <img src="card/saprbord.jpg" alt="Sapboard">
-                            <p>Сапборд</p>
+                        <div class="filter-group">
+                            <h3>Ивенты</h3>
+                            <label>
+                                <input type="checkbox" name="event" value="регата">
+                                Регата
+                            </label>
+                            <label>
+                                <input type="checkbox" name="event" value="тренировка">
+                                Тренировка
+                            </label>
                         </div>
-                        <div class="category-item hidden">
-                            <img src="card/flybord.jpg" alt="Flyboard">
-                            <p>Флайбординг</p>
+                        <div class="filter-group">
+                            <h3>Дата</h3>
+                            <input type="date">
                         </div>
-                        <div class="category-item hidden">
-                            <img src="card/kaitserf.jpg" alt="Kitesurfing">
-                            <p>Кайтсерфинг</p>
-                        </div>
+                    </section>
+                    <div class="results-and-map">
+                        <section class="results">
+                            <div id="no-results-message" class="no-results-message">Выберите фильтры или воспользуйтесь поиском</div>
+                            <ul class="result-list" id="result-list">
+                                <!-- Карточки из страницы поиска -->
+                                <li class="result-item" data-popularity="5" data-rating="4" data-sport="моторная тяга, весло, специальное оборудование" data-amenity="Можно детям, есть инвентарь" data-event="соревнования" data-lat="55.8789" data-lon="37.6543">
+                                    <a href="kart.html" class="result-link">
+                                        <div class="result-content">
+                                            <img src="card/cts.png" alt="Result 1" class="result-image">
+                                            <div class="result-text">
+                                                <h2>Яхт-клуб "Ореховая бухта"</h2>
+                                                <p>Московская область, городской округ Мытищи, деревня Волынское, Ореховая улица</p>
+                                                <div class="rating">
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9734;</span>
+                                                </div>
+                                                <div class="button-container">
+                                                    <button class="button green">Можно детям</button>
+                                                    <button class="button blue">Есть инвентарь</button>
+                                                    <button class="button darkblue">Соревнования</button>
+                                                </div>
+                                                <div>
+                                                    <button class="button red">Моторная тяга</button>
+                                                    <button class="button gray">Весло</button>
+                                                    <button class="button olive">Спец. оборудование</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="result-item" data-popularity="4" data-rating="5" data-sport="моторная тяга" data-amenity="есть инвентарь, инструктор" data-event="события" data-lat="55.8236" data-lon="37.4849">
+                                    <a href="kart.html" class="result-link">
+                                        <div class="result-content">
+                                            <img src="card/cv.png" alt="Result 2" class="result-image">
+                                            <div class="result-text">
+                                                <h2>ProYachting</h2>
+                                                <p>Ленинградское шоссе, 39, стр. 6</p>
+                                                <div class="rating">
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                </div>
+                                                <div class="button-container">
+                                                    <button class="button pink">Инструктор</button>
+                                                    <button class="button blue">Есть инвентарь</button>
+                                                    <button class="button purple">События</button>
+                                                </div>
+                                                <div>
+                                                    <button class="button red">Моторная тяга</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="result-item" data-popularity="3" data-rating="3" data-sport="специальное оборудование" data-amenity="Можно детям, есть инвентарь, инструктор" data-event="соревнования" data-lat="55.5912" data-lon="37.3045">
+                                    <a href="kart.html" class="result-link">
+                                        <div class="result-content">
+                                            <img src="card/frs.png" alt="Result 3" class="result-image">
+                                            <div class="result-text">
+                                                <h2>Прогулка на парусной яхте</h2>
+                                                <p>Московская область, г. Подольск, Улица 1 мая, д. 10</p>
+                                                <div class="rating">
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9734;</span>
+                                                    <span class="star">&#9734;</span>
+                                                </div>
+                                                <div class="button-container">
+                                                    <button class="button green">Можно детям</button>
+                                                    <button class="button pink">Инструктор</button>
+                                                    <button class="button blue">Есть инвентарь</button>
+                                                    <button class="button darkblue">Соревнования</button>
+                                                </div>
+                                                <div>
+                                                    <button class="button olive">Спец. оборудование</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="result-item" data-popularity="2" data-rating="2" data-sport="весло, специальное оборудование" data-event="соревнования" data-lat="55.7558" data-lon="37.6173">
+                                    <a href="kart.html" class="result-link">
+                                        <div class="result-content">
+                                            <img src="card/rfg.png" alt="Result 4" class="result-image">
+                                            <div class="result-text">
+                                                <h2>Прогулка на сапе</h2>
+                                                <p>г. Москва, ул. Наташкинская улица, ст.1</p>
+                                                <div class="rating">
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9734;</span>
+                                                    <span class="star">&#9734;</span>
+                                                    <span class="star">&#9734;</span>
+                                                </div>
+                                                <div class="button-container">
+                                                    <button class="button darkblue">Соревнования</button>
+                                                </div>
+                                                <div>
+                                                    <button class="button gray">Весло</button>
+                                                    <button class="button olive">Спец. оборудование</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="result-item" data-popularity="1" data-rating="1" data-sport="моторная тяга, весло, специальное оборудование" data-amenity="Можно детям, инструктор" data-lat="55.7522" data-lon="37.6156">
+                                    <a href="kart.html" class="result-link">
+                                        <div class="result-content">
+                                            <img src="card/XXXL.webp" alt="Result 5" class="result-image">
+                                            <div class="result-text">
+                                                <h2>Royal Yacht Club</h2>
+                                                <p>г. Москва, ул. Никольский тупик</p>
+                                                <div class="rating">
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9734;</span>
+                                                    <span class="star">&#9734;</span>
+                                                    <span class="star">&#9734;</span>
+                                                    <span class="star">&#9734;</span>
+                                                </div>
+                                                <div class="button-container">
+                                                    <button class="button green">Можно детям</button>
+                                                    <button class="button pink">Инструктор</button>
+                                                </div>
+                                                <div>
+                                                    <button class="button red">Моторная тяга</button>
+                                                    <button class="button gray">Весло</button>
+                                                    <button class="button olive">Спец. оборудование</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="result-item" data-popularity="6" data-rating="6" data-sport="моторная тяга, яхта, специальное оборудование" data-amenity="Можно детям" data-event="события" data-lat="55.7964" data-lon="37.5343">
+                                    <a href="kart.html" class="result-link">
+                                        <div class="result-content">
+                                            <img src="card/xdxx.webp" alt="Result 6" class="result-image">
+                                            <div class="result-text">
+                                                <h2>Подмосковная Ривьера</h2>
+                                                <p>г. Москва, Ленинградское шоссе, ст.1</p>
+                                                <div class="rating">
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                    <span class="star">&#9733;</span>
+                                                </div>
+                                                <div class="button-container">
+                                                    <button class="button green">Можно детям</button>
+                                                    <button class="button purple">События</button>
+                                                </div>
+                                                <div>
+                                                    <button class="button red">Моторная тяга</button>
+                                                    <button class="button orange">Яхта</button>
+                                                    <button class="button olive">Спец. оборудование</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                        <section class="map-section">
+                            <div id="map" class="map-container"></div>
+                        </section>
                     </div>
-                    <button id="show-more-button" class="show-more-button">Показать еще <span>&#9660;</span></button>
-                </section>
+                </div>
             </div>
         </main>
         <footer>
@@ -142,5 +355,176 @@
     </div>
     <script src="script.js"></script>
     <script src="script2.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=ВАШ_КЛЮЧ" type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(function () {
+            var myMap = new ymaps.Map("map", {
+                center: [55.7558, 37.6173], // Координаты для центра карты (Москва)
+                zoom: 10
+            });
+
+            // Функция для добавления маркеров на карту
+            function addMarkers() {
+                const resultList = document.getElementById('result-list');
+                const items = Array.from(resultList.getElementsByClassName('result-item'));
+
+                items.forEach(item => {
+                    const lat = item.getAttribute('data-lat');
+                    const lon = item.getAttribute('data-lon');
+                    const title = item.querySelector('h2').textContent;
+
+                    if (lat && lon) {
+                        var myPlacemark = new ymaps.Placemark([lat, lon], {
+                            hintContent: title,
+                            balloonContent: title
+                        });
+
+                        myMap.geoObjects.add(myPlacemark);
+                    }
+                });
+            }
+
+            // Вызываем функцию для добавления маркеров
+            addMarkers();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultList = document.getElementById('result-list');
+            const noResultsMessage = document.getElementById('no-results-message');
+            const items = Array.from(resultList.getElementsByClassName('result-item'));
+
+            // Изначально скрываем все карточки
+            items.forEach(item => item.style.display = 'none');
+            noResultsMessage.style.display = 'block';
+            noResultsMessage.textContent = 'Выберите фильтры или воспользуйтесь поиском';
+
+            // Функция для сортировки карточек
+            function sortCards(criteria) {
+                items.sort((a, b) => {
+                    const aValue = parseInt(a.getAttribute(`data-${criteria}`), 10);
+                    const bValue = parseInt(b.getAttribute(`data-${criteria}`), 10);
+                    return bValue - aValue;
+                });
+
+                items.forEach(item => resultList.appendChild(item));
+                filterCards();
+            }
+
+            // Обработчик события изменения радиокнопок
+            document.querySelectorAll('input[name="sort"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.id === 'popular') {
+                        sortCards('popularity');
+                    } else if (this.id === 'rating') {
+                        sortCards('rating');
+                    }
+                });
+            });
+
+            // Функция для фильтрации карточек
+            function filterCards() {
+                const filters = document.querySelectorAll('input[name="filter"]:checked');
+                const amenities = document.querySelectorAll('input[name="amenity"]:checked');
+                const events = document.querySelectorAll('input[name="event"]:checked');
+
+                let visibleItems = 0;
+
+                items.forEach(item => {
+                    const sportFilters = filters.length ? Array.from(filters).every(filter => item.getAttribute('data-sport').includes(filter.value)) : true;
+                    const amenityFilters = amenities.length ? Array.from(amenities).every(amenity => item.getAttribute('data-amenity').includes(amenity.value)) : true;
+                    const eventFilters = events.length ? Array.from(events).every(event => item.getAttribute('data-event').includes(event.value)) : true;
+
+                    if (sportFilters && amenityFilters && eventFilters) {
+                        item.style.display = 'flex';
+                        visibleItems++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (visibleItems === 0) {
+                    noResultsMessage.style.display = 'block';
+                    noResultsMessage.textContent = 'Ничего не найдено';
+                } else {
+                    noResultsMessage.style.display = 'none';
+                }
+            }
+
+            // Обработчик события изменения чекбоксов
+            document.querySelectorAll('input[name="filter"], input[name="amenity"], input[name="event"]').forEach(checkbox => {
+                checkbox.addEventListener('change', filterCards);
+            });
+
+            // Функция для поиска карточек
+            function searchCards() {
+                const query = document.getElementById('search-input').value.toLowerCase();
+                let visibleItems = 0;
+
+                items.forEach(item => {
+                    const title = item.querySelector('h2').textContent.toLowerCase();
+                    const description = item.querySelector('p').textContent.toLowerCase();
+                    if (title.includes(query) || description.includes(query)) {
+                        item.style.display = 'flex';
+                        visibleItems++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (visibleItems === 0) {
+                    noResultsMessage.style.display = 'block';
+                    noResultsMessage.textContent = 'Ничего не найдено';
+                } else {
+                    noResultsMessage.style.display = 'none';
+                }
+            }
+
+            // Обработчик события ввода текста в поле поиска
+            document.getElementById('search-input').addEventListener('input', function() {
+                // Убираем сообщение при вводе текста
+                noResultsMessage.style.display = 'none';
+            });
+
+            // Обработчик события нажатия на кнопку поиска
+            document.getElementById('search-button').addEventListener('click', searchCards);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginButton = document.getElementById('login-button');
+            const loginModal = document.getElementById('login-modal');
+            const registerModal = document.getElementById('register-modal');
+            const closeButtons = document.querySelectorAll('.close-button');
+            const registerLink = document.getElementById('register-link');
+            const loginLink = document.getElementById('login-link');
+
+            loginButton.addEventListener('click', function() {
+                loginModal.style.display = 'block';
+            });
+
+            registerLink.addEventListener('click', function() {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'block';
+            });
+
+            loginLink.addEventListener('click', function() {
+                registerModal.style.display = 'none';
+                loginModal.style.display = 'block';
+            });
+
+            closeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    loginModal.style.display = 'none';
+                    registerModal.style.display = 'none';
+                });
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == loginModal || event.target == registerModal) {
+                    loginModal.style.display = 'none';
+                    registerModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
