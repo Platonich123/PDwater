@@ -6,6 +6,7 @@
     <title>GoSpot</title>
     <link rel="stylesheet" href="styleG.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
     <div class="wrapper">
@@ -35,7 +36,7 @@
                     <div class="hero-background">
                         <div class="hero-image-container">
                             <div class="hero-image-wrapper">
-                                <img src="card\windy.webp" alt="Hero Image 1" class="hero-image">
+                                <img src="card/windy.webp" alt="Hero Image 1" class="hero-image">
                                 <div class="hero-content">
                                     <h1>windy</h1>
                                 </div>
@@ -48,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="hero-image-wrapper">
-                                <img src="card\энцикл.webp" alt="Hero Image 3" class="hero-image">
+                                <img src="card/энцикл.webp" alt="Hero Image 3" class="hero-image">
                                 <div class="hero-content">
                                     <h1>Энциклопедия</h1>
                                 </div>
@@ -330,8 +331,8 @@
                         <h3>Мобильное приложение</h3>
                         <p>В приложении ещё удобнее искать споты и узнавать о новых мероприятиях! Скачайте его и добавьте GoSpot на главный экран своего устройства даже если нет интернета.</p>
                         <div class="app-links">
-                            <a href="#"><img src="card\QR_code.jpg" alt="QR Code"></a>
-                            <a href="#"><img src="card\play.jpg" alt="Google Play"></a>
+                            <a href="#"><img src="card/QR_code.jpg" alt="QR Code"></a>
+                            <a href="#"><img src="card/play.jpg" alt="Google Play"></a>
                         </div>
                     </div>
                 </div>
@@ -371,176 +372,6 @@
     </div>
     <script src="script.js"></script>
     <script src="script2.js"></script>
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=ВАШ_КЛЮЧ" type="text/javascript"></script>
-    <script type="text/javascript">
-        ymaps.ready(function () {
-            var myMap = new ymaps.Map("map", {
-                center: [55.7558, 37.6173], // Координаты для центра карты (Москва)
-                zoom: 10
-            });
-
-            // Функция для добавления маркеров на карту
-            function addMarkers() {
-                const resultList = document.getElementById('result-list');
-                const items = Array.from(resultList.getElementsByClassName('result-item'));
-
-                items.forEach(item => {
-                    const lat = item.getAttribute('data-lat');
-                    const lon = item.getAttribute('data-lon');
-                    const title = item.querySelector('h2').textContent;
-
-                    if (lat && lon) {
-                        var myPlacemark = new ymaps.Placemark([lat, lon], {
-                            hintContent: title,
-                            balloonContent: title
-                        });
-
-                        myMap.geoObjects.add(myPlacemark);
-                    }
-                });
-            }
-
-            // Вызываем функцию для добавления маркеров
-            addMarkers();
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const resultList = document.getElementById('result-list');
-            const noResultsMessage = document.getElementById('no-results-message');
-            const items = Array.from(resultList.getElementsByClassName('result-item'));
-
-            // Изначально скрываем все карточки
-            items.forEach(item => item.style.display = 'none');
-            noResultsMessage.style.display = 'block';
-            noResultsMessage.textContent = 'Выберите фильтры или воспользуйтесь поиском';
-
-            // Функция для сортировки карточек
-            function sortCards(criteria) {
-                items.sort((a, b) => {
-                    const aValue = parseInt(a.getAttribute(`data-${criteria}`), 10);
-                    const bValue = parseInt(b.getAttribute(`data-${criteria}`), 10);
-                    return bValue - aValue;
-                });
-
-                items.forEach(item => resultList.appendChild(item));
-                filterCards();
-            }
-
-            // Обработчик события изменения радиокнопок
-            document.querySelectorAll('input[name="sort"]').forEach(radio => {
-                radio.addEventListener('change', function() {
-                    if (this.id === 'popular') {
-                        sortCards('popularity');
-                    } else if (this.id === 'rating') {
-                        sortCards('rating');
-                    }
-                });
-            });
-
-            // Функция для фильтрации карточек
-            function filterCards() {
-                const filters = document.querySelectorAll('input[name="filter"]:checked');
-                const amenities = document.querySelectorAll('input[name="amenity"]:checked');
-                const events = document.querySelectorAll('input[name="event"]:checked');
-
-                let visibleItems = 0;
-
-                items.forEach(item => {
-                    const sportFilters = filters.length ? Array.from(filters).every(filter => item.getAttribute('data-sport').includes(filter.value)) : true;
-                    const amenityFilters = amenities.length ? Array.from(amenities).every(amenity => item.getAttribute('data-amenity').includes(amenity.value)) : true;
-                    const eventFilters = events.length ? Array.from(events).every(event => item.getAttribute('data-event').includes(event.value)) : true;
-
-                    if (sportFilters && amenityFilters && eventFilters) {
-                        item.style.display = 'flex';
-                        visibleItems++;
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-
-                if (visibleItems === 0) {
-                    noResultsMessage.style.display = 'block';
-                    noResultsMessage.textContent = 'Ничего не найдено';
-                } else {
-                    noResultsMessage.style.display = 'none';
-                }
-            }
-
-            // Обработчик события изменения чекбоксов
-            document.querySelectorAll('input[name="filter"], input[name="amenity"], input[name="event"]').forEach(checkbox => {
-                checkbox.addEventListener('change', filterCards);
-            });
-
-            // Функция для поиска карточек
-            function searchCards() {
-                const query = document.getElementById('search-input').value.toLowerCase();
-                let visibleItems = 0;
-
-                items.forEach(item => {
-                    const title = item.querySelector('h2').textContent.toLowerCase();
-                    const description = item.querySelector('p').textContent.toLowerCase();
-                    if (title.includes(query) || description.includes(query)) {
-                        item.style.display = 'flex';
-                        visibleItems++;
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-
-                if (visibleItems === 0) {
-                    noResultsMessage.style.display = 'block';
-                    noResultsMessage.textContent = 'Ничего не найдено';
-                } else {
-                    noResultsMessage.style.display = 'none';
-                }
-            }
-
-            // Обработчик события ввода текста в поле поиска
-            document.getElementById('search-input').addEventListener('input', function() {
-                // Убираем сообщение при вводе текста
-                noResultsMessage.style.display = 'none';
-            });
-
-            // Обработчик события нажатия на кнопку поиска
-            document.getElementById('search-button').addEventListener('click', searchCards);
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginButton = document.getElementById('login-button');
-            const loginModal = document.getElementById('login-modal');
-            const registerModal = document.getElementById('register-modal');
-            const closeButtons = document.querySelectorAll('.close-button');
-            const registerLink = document.getElementById('register-link');
-            const loginLink = document.getElementById('login-link');
-
-            loginButton.addEventListener('click', function() {
-                loginModal.style.display = 'block';
-            });
-
-            registerLink.addEventListener('click', function() {
-                loginModal.style.display = 'none';
-                registerModal.style.display = 'block';
-            });
-
-            loginLink.addEventListener('click', function() {
-                registerModal.style.display = 'none';
-                loginModal.style.display = 'block';
-            });
-
-            closeButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    loginModal.style.display = 'none';
-                    registerModal.style.display = 'none';
-                });
-            });
-
-            window.addEventListener('click', function(event) {
-                if (event.target == loginModal || event.target == registerModal) {
-                    loginModal.style.display = 'none';
-                    registerModal.style.display = 'none';
-                }
-            });
-        });
-    </script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 </html>

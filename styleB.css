@@ -102,22 +102,19 @@ main {
 
 .blog-section {
     display: flex;
-    flex-direction: column;
     margin-top: 40px;
 }
 
 .blog-filters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    width: 250px;
+    margin-right: 20px;
 }
 
 .filter-category, .filter-sort {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 5px;
-    flex: 1;
-    margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 .filter-category h3, .filter-sort h3 {
@@ -136,6 +133,7 @@ main {
 
 .sort-buttons {
     display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
@@ -154,6 +152,7 @@ main {
 }
 
 .blog-posts {
+    flex: 1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
@@ -262,12 +261,17 @@ footer {
         text-align: center;
     }
 
-    .blog-filters {
+    .blog-section {
         flex-direction: column;
     }
 
-    .filter-category, .filter-sort {
+    .blog-filters {
+        width: 100%;
         margin-bottom: 20px;
+    }
+
+    .blog-posts {
+        width: 100%;
     }
 }
 
@@ -371,4 +375,25 @@ footer {
 
 .modal-content a:hover {
     text-decoration: underline;
+}
+
+/* Стили для кнопки и списка авторов */
+.toggle-authors {
+    background-color: #e9f5fb;
+    color: #0056b3;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    text-align: left;
+}
+
+.authors-list {
+    display: none;
+    margin-top: 10px;
+}
+
+.authors-list.active {
+    display: block;
 }

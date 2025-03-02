@@ -40,8 +40,29 @@
                                 <label for="filter-news">Статьи</label>
                             </div>
                             <div class="filter-item">
-                                <input type="checkbox" id="filter-author" name="filter-author" checked>
-                                <label for="filter-author">Илья Никонов</label>
+                                <button class="toggle-authors">Авторы</button>
+                                <div class="authors-list">
+                                    <div class="filter-item">
+                                        <input type="checkbox" id="filter-author-1" name="filter-author-1" checked>
+                                        <label for="filter-author-1">Илья Никонов</label>
+                                    </div>
+                                    <div class="filter-item">
+                                        <input type="checkbox" id="filter-author-2" name="filter-author-2" checked>
+                                        <label for="filter-author-2">Мария Иванова</label>
+                                    </div>
+                                    <div class="filter-item">
+                                        <input type="checkbox" id="filter-author-3" name="filter-author-3" checked>
+                                        <label for="filter-author-3">Алексей Кузнецов</label>
+                                    </div>
+                                    <div class="filter-item">
+                                        <input type="checkbox" id="filter-author-4" name="filter-author-4" checked>
+                                        <label for="filter-author-4">Екатерина Соколова</label>
+                                    </div>
+                                    <div class="filter-item">
+                                        <input type="checkbox" id="filter-author-5" name="filter-author-5" checked>
+                                        <label for="filter-author-5">Ольга Васильева</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="filter-sort">
@@ -213,6 +234,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             const sortButtons = document.querySelectorAll('.sort-button');
             const blogPosts = document.querySelectorAll('.blog-post');
+            const toggleAuthorsButton = document.querySelector('.toggle-authors');
+            const authorsList = document.querySelector('.authors-list');
 
             sortButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -228,6 +251,10 @@
                         }
                     });
                 });
+            });
+
+            toggleAuthorsButton.addEventListener('click', function() {
+                authorsList.classList.toggle('active');
             });
         });
     </script>
