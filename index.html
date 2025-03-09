@@ -61,22 +61,14 @@
 
                 <!-- Поисковая строка -->
                 <section class="search-bar">
-                    <div class="container">
-                        <div class="search-wrapper">
-                            <input type="text" class="search-input" placeholder="Поиск по локации, активности и т.д." id="search-input">
-                            <button class="search-button" id="search-button">Поиск</button>
-                        </div>
+                    <div class="search-wrapper">
+                        <input type="text" class="search-input" placeholder="Поиск по локации, активности и т.д." id="search-input">
+                        <button class="search-button" id="search-button">Поиск</button>
                     </div>
                 </section>
 
-                <!-- Фильтры и результаты поиска -->
-                <div class="sort-buttons">
-                    <input type="radio" id="popular" name="sort" checked>
-                    <label for="popular" class="sort-button">Популярное</label>
-                    <input type="radio" id="rating" name="sort">
-                    <label for="rating" class="sort-button">По рейтингу</label>
-                </div>
-                <div class="filters-and-results">
+                <!-- Фильтры и карта -->
+                <div class="filters-and-map">
                     <section class="filters">
                         <div class="filter-group">
                             <h3>Группы спорта</h3>
@@ -146,178 +138,9 @@
                             <input type="date">
                         </div>
                     </section>
-                    <div class="results-and-map">
-                        <section class="results">
-                            <div id="no-results-message" class="no-results-message">Выберите фильтры или воспользуйтесь поиском</div>
-                            <ul class="result-list" id="result-list">
-                                <!-- Карточки из страницы поиска -->
-                                <li class="result-item" data-popularity="5" data-rating="4" data-sport="моторная тяга, весло, специальное оборудование" data-amenity="Можно детям, есть инвентарь" data-event="соревнования" data-lat="55.8789" data-lon="37.6543">
-                                    <a href="kart.html" class="result-link">
-                                        <div class="result-content">
-                                            <img src="card/cts.png" alt="Result 1" class="result-image">
-                                            <div class="result-text">
-                                                <h2>Яхт-клуб "Ореховая бухта"</h2>
-                                                <p>Московская область, городской округ Мытищи, деревня Волынское, Ореховая улица</p>
-                                                <div class="rating">
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9734;</span>
-                                                </div>
-                                                <div class="button-container">
-                                                    <button class="button green">Можно детям</button>
-                                                    <button class="button blue">Есть инвентарь</button>
-                                                    <button class="button darkblue">Соревнования</button>
-                                                </div>
-                                                <div>
-                                                    <button class="button red">Моторная тяга</button>
-                                                    <button class="button gray">Весло</button>
-                                                    <button class="button olive">Спец. оборудование</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="result-item" data-popularity="4" data-rating="5" data-sport="моторная тяга" data-amenity="есть инвентарь, инструктор" data-event="события" data-lat="55.8236" data-lon="37.4849">
-                                    <a href="kart.html" class="result-link">
-                                        <div class="result-content">
-                                            <img src="card/cv.png" alt="Result 2" class="result-image">
-                                            <div class="result-text">
-                                                <h2>ProYachting</h2>
-                                                <p>Ленинградское шоссе, 39, стр. 6</p>
-                                                <div class="rating">
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                </div>
-                                                <div class="button-container">
-                                                    <button class="button pink">Инструктор</button>
-                                                    <button class="button blue">Есть инвентарь</button>
-                                                    <button class="button purple">События</button>
-                                                </div>
-                                                <div>
-                                                    <button class="button red">Моторная тяга</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="result-item" data-popularity="3" data-rating="3" data-sport="специальное оборудование" data-amenity="Можно детям, есть инвентарь, инструктор" data-event="соревнования" data-lat="55.5912" data-lon="37.3045">
-                                    <a href="kart.html" class="result-link">
-                                        <div class="result-content">
-                                            <img src="card/frs.png" alt="Result 3" class="result-image">
-                                            <div class="result-text">
-                                                <h2>Прогулка на парусной яхте</h2>
-                                                <p>Московская область, г. Подольск, Улица 1 мая, д. 10</p>
-                                                <div class="rating">
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9734;</span>
-                                                    <span class="star">&#9734;</span>
-                                                </div>
-                                                <div class="button-container">
-                                                    <button class="button green">Можно детям</button>
-                                                    <button class="button pink">Инструктор</button>
-                                                    <button class="button blue">Есть инвентарь</button>
-                                                    <button class="button darkblue">Соревнования</button>
-                                                </div>
-                                                <div>
-                                                    <button class="button olive">Спец. оборудование</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="result-item" data-popularity="2" data-rating="2" data-sport="весло, специальное оборудование" data-event="соревнования" data-lat="55.7558" data-lon="37.6173">
-                                    <a href="kart.html" class="result-link">
-                                        <div class="result-content">
-                                            <img src="card/rfg.png" alt="Result 4" class="result-image">
-                                            <div class="result-text">
-                                                <h2>Прогулка на сапе</h2>
-                                                <p>г. Москва, ул. Наташкинская улица, ст.1</p>
-                                                <div class="rating">
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9734;</span>
-                                                    <span class="star">&#9734;</span>
-                                                    <span class="star">&#9734;</span>
-                                                </div>
-                                                <div class="button-container">
-                                                    <button class="button darkblue">Соревнования</button>
-                                                </div>
-                                                <div>
-                                                    <button class="button gray">Весло</button>
-                                                    <button class="button olive">Спец. оборудование</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="result-item" data-popularity="1" data-rating="1" data-sport="моторная тяга, весло, специальное оборудование" data-amenity="Можно детям, инструктор" data-lat="55.7522" data-lon="37.6156">
-                                    <a href="kart.html" class="result-link">
-                                        <div class="result-content">
-                                            <img src="card/XXXL.webp" alt="Result 5" class="result-image">
-                                            <div class="result-text">
-                                                <h2>Royal Yacht Club</h2>
-                                                <p>г. Москва, ул. Никольский тупик</p>
-                                                <div class="rating">
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9734;</span>
-                                                    <span class="star">&#9734;</span>
-                                                    <span class="star">&#9734;</span>
-                                                    <span class="star">&#9734;</span>
-                                                </div>
-                                                <div class="button-container">
-                                                    <button class="button green">Можно детям</button>
-                                                    <button class="button pink">Инструктор</button>
-                                                </div>
-                                                <div>
-                                                    <button class="button red">Моторная тяга</button>
-                                                    <button class="button gray">Весло</button>
-                                                    <button class="button olive">Спец. оборудование</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="result-item" data-popularity="6" data-rating="6" data-sport="моторная тяга, яхта, специальное оборудование" data-amenity="Можно детям" data-event="события" data-lat="55.7964" data-lon="37.5343">
-                                    <a href="kart.html" class="result-link">
-                                        <div class="result-content">
-                                            <img src="card/xdxx.webp" alt="Result 6" class="result-image">
-                                            <div class="result-text">
-                                                <h2>Подмосковная Ривьера</h2>
-                                                <p>г. Москва, Ленинградское шоссе, ст.1</p>
-                                                <div class="rating">
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                    <span class="star">&#9733;</span>
-                                                </div>
-                                                <div class="button-container">
-                                                    <button class="button green">Можно детям</button>
-                                                    <button class="button purple">События</button>
-                                                </div>
-                                                <div>
-                                                    <button class="button red">Моторная тяга</button>
-                                                    <button class="button orange">Яхта</button>
-                                                    <button class="button olive">Спец. оборудование</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </section>
-                        <section class="map-section">
-                            <div id="map" class="map-container"></div>
-                        </section>
-                    </div>
+                    <section class="map-section">
+                        <div id="map" class="map-container"></div>
+                    </section>
                 </div>
             </div>
         </main>

@@ -198,3 +198,52 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const loginButton = document.getElementById('login-button');
+    const loginModal = document.getElementById('login-modal');
+    const registerModal = document.getElementById('register-modal');
+    const closeButtons = document.querySelectorAll('.close-button');
+    const registerLink = document.getElementById('register-link');
+    const loginLink = document.getElementById('login-link');
+
+    // Логика для открытия модального окна входа
+    loginButton.addEventListener('click', function() {
+        loginModal.style.display = 'block';
+    });
+
+    // Логика для переключения на модальное окно регистрации
+    registerLink.addEventListener('click', function() {
+        loginModal.style.display = 'none';
+        registerModal.style.display = 'block';
+    });
+
+    // Логика для переключения на модальное окно входа
+    loginLink.addEventListener('click', function() {
+        registerModal.style.display = 'none';
+        loginModal.style.display = 'block';
+    });
+
+    // Логика для закрытия модальных окон
+    closeButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'none';
+        });
+    });
+
+    // Логика для закрытия модальных окон при клике вне их области
+    window.addEventListener('click', function(event) {
+        if (event.target == loginModal || event.target == registerModal) {
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'none';
+        }
+    });
+
+    // Инициализация карты Leaflet
+    var map = L.map('map').setView([55.7558, 37.6173], 10); // Координаты для центра карты (Москва)
+
+    // Добавление слоя OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+});
