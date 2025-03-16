@@ -247,11 +247,11 @@ main {
 }
 
 .filters-and-map {
-    display: flex; /* Включаем flexbox */
-    flex-direction: row; /* Элементы в строку (горизонтально) */
-    gap: 20px; /* Расстояние между фильтрами и картой */
-    width: 100%; /* Занимает всю ширину */
-    margin-top: 20px; /* Отступ сверху */
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .filters {
@@ -261,6 +261,7 @@ main {
     border-radius: 10px;
     border: 2px solid #ffffff;
     margin-top: -30px;
+    margin-left: 10px;
 }
 
 .filter-group {
@@ -315,14 +316,20 @@ main {
 }
 
 .map-section {
-    width: calc(80% - 20px); /* Увеличиваем ширину карты и учитываем отступ */
+    width: calc(80% - 20px);
     margin-top: 0px;
-    margin-left: 20px; /* Сдвигаем карту вправо */
+    margin-left: 20px;
 }
 
 .map-container {
-    width: 100%; /* Увеличьте ширину карты */
+    width: 100%;
     height: 965px;
+}
+
+.checkboxes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 footer {
@@ -404,6 +411,28 @@ footer {
 
     .filters {
         width: 30%;
+        padding: 15px;
+    }
+
+    .filter-group {
+        padding: 12px;
+    }
+
+    .filter-group h3 {
+        font-size: 14px;
+    }
+
+    .filter-group label {
+        font-size: 12px;
+    }
+
+    .filter-group input[type="text"],
+    .filter-group input[type="date"] {
+        padding: 8px;
+    }
+
+    .checkboxes-container {
+        gap: 6px;
     }
 
     .map-section {
@@ -437,7 +466,7 @@ footer {
         max-width: 1000px;
     }
     .filters {
-        margin-left: -30px;
+        margin-left: -22px;
     }
     .map-container {
         width: 100%;
@@ -450,16 +479,27 @@ footer {
 @media (max-width: 768px) {
     .filters-and-map {
         flex-direction: column;
-        gap: 15px;
     }
 
     .filters {
         width: 100%;
-        padding: 15px;
+        margin: 0 0 20px 0;
+        transform: none;
+    }
+
+    .filter-group {
+        margin-bottom: 8px;
+    }
+
+    .checkboxes-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
 
     .map-section {
         width: 100%;
+        margin-left: 0;
     }
 
     .map-container {
@@ -510,6 +550,31 @@ footer {
 
     .filters {
         padding: 10px;
+    }
+
+    .filter-group {
+        padding: 10px;
+        margin-bottom: 6px;
+    }
+
+    .filter-group h3 {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .filter-group label {
+        font-size: 11px;
+    }
+
+    .filter-group input[type="text"],
+    .filter-group input[type="date"] {
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    .checkboxes-container {
+        grid-template-columns: 1fr;
+        gap: 6px;
     }
 
     .map-container {
@@ -673,5 +738,196 @@ p {
 
     h3 {
         font-size: 1rem;
+    }
+}
+
+.windy-map-section {
+    padding: 40px 0;
+}
+
+.windy-map-section h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.windy-map-container {
+    width: 100%;
+    height: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.windy-forecast-container {
+    width: 100%;
+    min-height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .windy-map-container {
+        height: 400px;
+    }
+    
+    .windy-forecast-container {
+        min-height: 300px;
+    }
+}
+
+/* Стили для попапов на карте */
+.spot-popup {
+    padding: 10px;
+    max-width: 250px;
+}
+
+.spot-popup h3 {
+    color: #007bff;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.spot-popup p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.spot-popup strong {
+    color: #333;
+}
+
+/* Стили для маркеров на карте */
+.leaflet-marker-icon {
+    background-color: #007bff;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.leaflet-popup-tip {
+    background: white;
+}
+
+/* Адаптивные стили для навигации */
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    .header-left img.logo {
+        margin-right: -100px;
+    }
+    
+    .main-menu ul {
+        margin-right: 0;
+    }
+    
+    .header-right {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    header .container {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .header-left {
+        order: 1;
+        width: auto;
+    }
+    
+    .header-right {
+        order: 2;
+        width: auto;
+    }
+    
+    .main-menu {
+        order: 3;
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    .header-left img.logo {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-menu ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .main-menu li {
+        margin: 5px 10px;
+    }
+    
+    .header-right {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .header-right .button {
+        margin: 5px;
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    header {
+        padding: 10px 0;
+    }
+    
+    .header-left img.logo {
+        max-height: 40px;
+    }
+    
+    .main-menu {
+        margin-top: 10px;
+    }
+    
+    .main-menu ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .main-menu li {
+        margin: 5px 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .main-menu a {
+        display: block;
+        padding: 8px;
+        font-size: 16px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .header-right {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .header-right .button {
+        width: 100%;
+        margin: 5px 0;
+        text-align: center;
     }
 }

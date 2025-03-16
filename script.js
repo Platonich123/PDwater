@@ -39,34 +39,55 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultList = document.getElementById('result-list');
     const noResultsMessage = document.getElementById('no-results-message');
     const items = Array.from(resultList.getElementsByClassName('result-item'));
+    let markers = [];
+    let map;
 
-    // Изначально скрываем все карточки
-    items.forEach(item => item.style.display = 'none');
-    noResultsMessage.style.display = 'block';
-    noResultsMessage.textContent = 'Выберите фильтры или воспользуйтесь поиском';
-
-    // Функция для сортировки карточек
-    function sortCards(criteria) {
-        items.sort((a, b) => {
-            const aValue = parseInt(a.getAttribute(`data-${criteria}`), 10);
-            const bValue = parseInt(b.getAttribute(`data-${criteria}`), 10);
-            return bValue - aValue;
-        });
-
-        items.forEach(item => resultList.appendChild(item));
-        filterCards();
+    // Инициализация карты
+    function initMap() {
+        map = L.map('map').setView([55.7558, 37.6173], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        addMarkers();
     }
 
-    // Обработчик события изменения радиокнопок
-    document.querySelectorAll('input[name="sort"]').forEach(radio => {
-        radio.addEventListener('change', function() {
-            if (this.id === 'popular') {
-                sortCards('popularity');
-            } else if (this.id === 'rating') {
-                sortCards('rating');
+    // Добавление маркеров на карту
+    function addMarkers() {
+        // Очищаем существующие маркеры
+        markers.forEach(marker => map.removeLayer(marker));
+        markers = [];
+
+        items.forEach(item => {
+            if (item.style.display !== 'none') {
+                const lat = parseFloat(item.getAttribute('data-lat'));
+                const lon = parseFloat(item.getAttribute('data-lon'));
+                const title = item.querySelector('h2').textContent;
+                const description = item.querySelector('p').textContent;
+
+                if (lat && lon) {
+                    const marker = L.marker([lat, lon]).addTo(map);
+                    marker.bindPopup(`<h2>${title}</h2><p>${description}</p>`);
+                    
+                    // Связываем маркер с карточкой
+                    marker.on('click', () => {
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        item.style.backgroundColor = '#f0f0f0';
+                        setTimeout(() => {
+                            item.style.backgroundColor = 'white';
+                        }, 1500);
+                    });
+
+                    markers.push(marker);
+                }
             }
         });
-    });
+
+        // Если есть маркеры, центрируем карту по ним
+        if (markers.length > 0) {
+            const group = new L.featureGroup(markers);
+            map.fitBounds(group.getBounds().pad(0.1));
+        }
+    }
 
     // Функция для фильтрации карточек
     function filterCards() {
@@ -77,9 +98,12 @@ document.addEventListener('DOMContentLoaded', function() {
         let visibleItems = 0;
 
         items.forEach(item => {
-            const sportFilters = filters.length ? Array.from(filters).every(filter => item.getAttribute('data-sport').includes(filter.value)) : true;
-            const amenityFilters = amenities.length ? Array.from(amenities).every(amenity => item.getAttribute('data-amenity').includes(amenity.value)) : true;
-            const eventFilters = events.length ? Array.from(events).every(event => item.getAttribute('data-event').includes(event.value)) : true;
+            const sportFilters = filters.length ? Array.from(filters).every(filter => 
+                item.getAttribute('data-sport').split(',').includes(filter.value)) : true;
+            const amenityFilters = amenities.length ? Array.from(amenities).every(amenity => 
+                item.getAttribute('data-amenity').split(',').includes(amenity.value)) : true;
+            const eventFilters = events.length ? Array.from(events).every(event => 
+                item.getAttribute('data-event').split(',').includes(event.value)) : true;
 
             if (sportFilters && amenityFilters && eventFilters) {
                 item.style.display = 'flex';
@@ -95,14 +119,12 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             noResultsMessage.style.display = 'none';
         }
+
+        // Обновляем маркеры после фильтрации
+        addMarkers();
     }
 
-    // Обработчик события изменения чекбоксов
-    document.querySelectorAll('input[name="filter"], input[name="amenity"], input[name="event"]').forEach(checkbox => {
-        checkbox.addEventListener('change', filterCards);
-    });
-
-    // Функция для поиска карточек
+    // Функция для поиска
     function searchCards() {
         const query = document.getElementById('search-input').value.toLowerCase();
         let visibleItems = 0;
@@ -124,41 +146,43 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             noResultsMessage.style.display = 'none';
         }
+
+        // Обновляем маркеры после поиска
+        addMarkers();
     }
 
-    // Обработчик события ввода текста в поле поиска
-    document.getElementById('search-input').addEventListener('input', function() {
-        // Убираем сообщение при вводе текста
-        noResultsMessage.style.display = 'none';
+    // Инициализация карты
+    initMap();
+
+    // Обработчики событий
+    document.querySelectorAll('input[name="filter"], input[name="amenity"], input[name="event"]').forEach(checkbox => {
+        checkbox.addEventListener('change', filterCards);
     });
 
-    // Обработчик события нажатия на кнопку поиска
     document.getElementById('search-button').addEventListener('click', searchCards);
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchCards();
+        }
+    });
 
-    // Инициализация карты Leaflet
-    var map = L.map('map').setView([55.7558, 37.6173], 10); // Координаты для центра карты (Москва)
-
-    // Добавление слоя OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    // Функция для добавления маркеров на карту
-    function addMarkers() {
-        items.forEach(item => {
-            const lat = item.getAttribute('data-lat');
-            const lon = item.getAttribute('data-lon');
-            const title = item.querySelector('h2').textContent;
-
+    // Добавляем обработчики событий для карточек
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            const lat = parseFloat(item.getAttribute('data-lat'));
+            const lon = parseFloat(item.getAttribute('data-lon'));
             if (lat && lon) {
-                var marker = L.marker([lat, lon]).addTo(map);
-                marker.bindPopup(title).openPopup();
+                map.setView([lat, lon], 14);
+                const marker = markers.find(m => 
+                    m.getLatLng().lat === lat && 
+                    m.getLatLng().lng === lon
+                );
+                if (marker) {
+                    marker.openPopup();
+                }
             }
         });
-    }
-
-    // Вызываем функцию для добавления маркеров
-    addMarkers();
+    });
 });
 
 document.addEventListener('DOMContentLoaded', function() {

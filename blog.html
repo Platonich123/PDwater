@@ -236,7 +236,28 @@
             const blogPosts = document.querySelectorAll('.blog-post');
             const toggleAuthorsButton = document.querySelector('.toggle-authors');
             const authorsList = document.querySelector('.authors-list');
+            const authorCheckboxes = document.querySelectorAll('.authors-list input[type="checkbox"]');
 
+            // Функция для фильтрации постов по авторам
+            function filterPostsByAuthors() {
+                const selectedAuthors = Array.from(authorCheckboxes)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => {
+                        const label = checkbox.nextElementSibling;
+                        return label.textContent;
+                    });
+
+                blogPosts.forEach(post => {
+                    const postAuthor = post.querySelector('.post-author').textContent;
+                    if (selectedAuthors.length === 0 || selectedAuthors.includes(postAuthor)) {
+                        post.style.display = 'block';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+            }
+
+            // Обработчик для кнопок сортировки
             sortButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     sortButtons.forEach(btn => btn.classList.remove('active'));
@@ -253,8 +274,23 @@
                 });
             });
 
+            // Обработчик для кнопки переключения списка авторов
             toggleAuthorsButton.addEventListener('click', function() {
-                authorsList.classList.toggle('active');
+                this.classList.toggle('active');
+                authorsList.style.display = authorsList.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Обработчики для чекбоксов авторов
+            authorCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', filterPostsByAuthors);
+            });
+
+            // Закрытие списка авторов при клике вне его
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.authors-list') && !event.target.closest('.toggle-authors')) {
+                    authorsList.style.display = 'none';
+                    toggleAuthorsButton.classList.remove('active');
+                }
             });
         });
     </script>

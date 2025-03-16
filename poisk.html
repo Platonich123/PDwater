@@ -285,12 +285,13 @@
                 <section class="map-section">
                     <div id="map" class="map-container"></div>
                 </section>
-                <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=ВАШ_КЛЮЧ" type="text/javascript"></script>
+                <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_API_ключ&lang=ru_RU" type="text/javascript"></script>
                 <script type="text/javascript">
                     ymaps.ready(function () {
                         var myMap = new ymaps.Map("map", {
-                            center: [55.7558, 37.6173], // Координаты для центра карты (Москва)
-                            zoom: 10
+                            center: [55.7558, 37.6173],
+                            zoom: 10,
+                            controls: ['zoomControl', 'searchControl', 'typeSelector']
                         });
 
                         // Функция для добавления маркеров на карту
@@ -299,23 +300,61 @@
                             const items = Array.from(resultList.getElementsByClassName('result-item'));
 
                             items.forEach(item => {
-                                const lat = item.getAttribute('data-lat');
-                                const lon = item.getAttribute('data-lon');
+                                const lat = parseFloat(item.getAttribute('data-lat'));
+                                const lon = parseFloat(item.getAttribute('data-lon'));
                                 const title = item.querySelector('h2').textContent;
-
+                                const address = item.querySelector('p').textContent;
+                                const rating = item.querySelector('.rating').innerHTML;
+                                
                                 if (lat && lon) {
-                                    var myPlacemark = new ymaps.Placemark([lat, lon], {
+                                    const balloonContent = `
+                                        <div class="balloon">
+                                            <h3>${title}</h3>
+                                            <p>${address}</p>
+                                            <div class="rating">${rating}</div>
+                                        </div>
+                                    `;
+
+                                    const placemark = new ymaps.Placemark([lat, lon], {
                                         hintContent: title,
-                                        balloonContent: title
+                                        balloonContent: balloonContent
+                                    }, {
+                                        preset: 'islands#blueWaterParkCircleIcon',
+                                        iconColor: '#1e98ff'
                                     });
 
-                                    myMap.geoObjects.add(myPlacemark);
+                                    // Добавляем обработчик клика на метку
+                                    placemark.events.add('click', function() {
+                                        // Находим соответствующую карточку
+                                        const card = item;
+                                        // Подсвечиваем карточку
+                                        document.querySelectorAll('.result-item').forEach(i => i.classList.remove('highlighted'));
+                                        card.classList.add('highlighted');
+                                        // Прокручиваем к карточке
+                                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    });
+
+                                    myMap.geoObjects.add(placemark);
                                 }
                             });
                         }
 
                         // Вызываем функцию для добавления маркеров
                         addMarkers();
+
+                        // Обновляем маркеры при фильтрации
+                        function updateMarkers() {
+                            myMap.geoObjects.removeAll();
+                            addMarkers();
+                        }
+
+                        // Добавляем обработчики событий для обновления маркеров
+                        document.querySelectorAll('input[name="filter"], input[name="amenity"], input[name="event"]').forEach(checkbox => {
+                            checkbox.addEventListener('change', updateMarkers);
+                        });
+
+                        document.getElementById('search-input').addEventListener('input', updateMarkers);
+                        document.getElementById('search-button').addEventListener('click', updateMarkers);
                     });
 
                     // Функция для сортировки карточек
