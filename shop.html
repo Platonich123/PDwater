@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoSpot</title>
+    <link rel="stylesheet" href="styleA.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="container">
+                <div class="header-left">
+                    <a href="index.html"><img src="card/logo.png" alt="GoSpot Logo" class="logo"></a>
+                </div>
+                <nav class="main-menu">
+                    <ul>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="blog.html">Блог</a></li>
+                        <li><a href="shop.html" class="active">Магазин</a></li>
+                        <li><a href="help.html">Помощь</a></li>
+                        <li><a href="favorites.html">Избранное</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right">
+                    <a href="#" class="button">Для бизнеса</a>
+                    <button id="login-button" class="button">Войти</button>
+                </div>
+            </div>
+        </header>
+        <main>
+            </div>
+
+            </div>
+        </main>
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <p>&copy; 2023 GoSpot. Все права защищены.</p>
+                    </div>
+                    <div class="footer-section mobile-app">
+                        <h3>Мобильное приложение</h3>
+                        <p>В приложении ещё удобнее искать споты и узнавать о новых мероприятиях! Скачайте его и добавьте GoSpot на главный экран своего устройства даже если нет интернета.</p>
+                        <div class="app-links">
+                            <a href="#"><img src="card/QR_code.jpg" alt="QR Code"></a>
+                            <a href="#"><img src="card/play.jpg" alt="Google Play"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Модальное окно входа -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>GoSpot</h2>
+            <h3>Вход</h3>
+            <form>
+                <input type="text" placeholder="Логин" required>
+                <input type="password" placeholder="Пароль" required>
+                <button type="submit">Войти</button>
+            </form>
+            <p>Нет аккаунта? <a href="#" id="register-link">Зарегистрируйтесь</a></p>
+        </div>
+    </div>
+
+    <!-- Модальное окно регистрации -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>GoSpot</h2>
+            <h3>Регистрация</h3>
+            <form>
+                <input type="text" placeholder="Логин" required>
+                <input type="password" placeholder="Пароль" required>
+                <input type="password" placeholder="Пароль еще раз" required>
+                <button type="submit">Регистрация</button>
+            </form>
+            <p>Вы зарегистрированы? <a href="#" id="login-link">Войдите</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -22,9 +22,11 @@ body {
 
 header {
     background-color: white;
-    color: black;
-    padding: 20px 0;
-    position: relative;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 header .container {
@@ -34,17 +36,14 @@ header .container {
 }
 
 .header-left img.logo {
-    max-height: 70px; /* Максимальная высота изображения */
-    width: auto; /* Ширина будет автоматически подстраиваться */
-    height: auto;
-    margin-right: -220px;
+    max-height: 50px;
+    width: auto;
 }
 
 .main-menu ul {
-    list-style: none;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    list-style: none;
+    gap: -25px;
     margin: 0;
     padding: 0;
 }
@@ -56,7 +55,8 @@ header .container {
 .main-menu a {
     color: black;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1rem;
+    transition: color 0.3s ease;
 }
 
 .main-menu a:hover {
@@ -66,12 +66,24 @@ header .container {
 .main-menu a.active {
     color: #0056b3;
     border-bottom: 2px solid #0056b3;
+    font-weight: 600;
 }
 
 .header-right {
     display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
+    gap: 5px;
+    margin-right: -60px;
+}
+
+.button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
 }
 
 .header-right .button {
@@ -79,7 +91,8 @@ header .container {
     color: white;
     border: none;
     padding: 10px 20px;
-    margin-left: 10px;
+    margin-right: 60px;
+    margin-left: -50px;
     cursor: pointer;
     border-radius: 5px;
     text-decoration: none;
@@ -95,7 +108,7 @@ main {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -138,7 +151,7 @@ main {
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f9f9;
-    text-align: left; /* Выравнивание текста по левому краю */
+    text-align: left;
 }
 
 .faq-content h4 {
@@ -149,7 +162,7 @@ main {
 
 .faq-content p {
     margin: 10px 0;
-    line-height: 1.6; /* Улучшение читаемости */
+    line-height: 1.6;
 }
 
 .contact-info ul {

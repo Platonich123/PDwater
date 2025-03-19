@@ -43,7 +43,7 @@ header .container {
 .main-menu ul {
     display: flex;
     list-style: none;
-    gap: 20px; /* Расстояние между пунктами меню */
+    gap: -25px; /* Расстояние между пунктами меню */
     margin: 0;
     padding: 0;
 }
