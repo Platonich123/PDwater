@@ -53,14 +53,42 @@ header .container {
 }
 
 .main-menu a {
-    color: black;
+    color: #333;
     text-decoration: none;
     font-size: 1rem;
-    transition: color 0.3s ease; /* Плавное изменение цвета */
+    font-weight: 500;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .main-menu a:hover {
     color: #0056b3;
+}
+
+.main-menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0056b3;
+    transition: width 0.3s ease;
+}
+
+.main-menu a:hover::after {
+    width: 100%;
+}
+
+.main-menu a.active {
+    color: #0056b3;
+    font-weight: 600;
+}
+
+.main-menu a.active::after {
+    width: 100%;
+    background-color: #0056b3;
 }
 
 .header-right {
@@ -319,11 +347,15 @@ main {
     width: calc(80% - 20px);
     margin-top: 0px;
     margin-left: 20px;
+    height: calc(100vh - 100px); /* Увеличиваем высоту */
 }
 
 .map-container {
     width: 100%;
-    height: 965px;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .checkboxes-container {
@@ -500,10 +532,11 @@ footer {
     .map-section {
         width: 100%;
         margin-left: 0;
+        height: calc(100vh - 200px); /* Увеличиваем высоту для планшетов */
     }
 
     .map-container {
-        height: 400px;
+        height: 100%;
     }
     .main-menu {
         display: none; /* Скрываем меню на мобильных */
@@ -577,8 +610,8 @@ footer {
         gap: 6px;
     }
 
-    .map-container {
-        height: 300px;
+    .map-section {
+        height: calc(100vh - 180px); /* Увеличиваем высоту для мобильных */
     }
 
     .filters-and-map {
@@ -758,7 +791,6 @@ p {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
 }
 
 .windy-forecast-container {
@@ -930,4 +962,75 @@ p {
         margin: 5px 0;
         text-align: center;
     }
+}
+
+/* Стили для всплывающих окон */
+.custom-popup .leaflet-popup-content-wrapper {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.custom-popup .leaflet-popup-content {
+    margin: 0;
+    padding: 15px;
+}
+
+.spot-popup {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.spot-popup h3 {
+    margin: 10px 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.spot-popup p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.spot-popup .rating {
+    margin: 10px 0;
+}
+
+.spot-popup .star {
+    color: #ffd700;
+    font-size: 18px;
+    margin-right: 2px;
+}
+
+.spot-popup .button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 3px;
+    border: none;
+    border-radius: 15px;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.spot-popup .button.green { background-color: #4CAF50; }
+.spot-popup .button.blue { background-color: #2196F3; }
+.spot-popup .button.pink { background-color: #E91E63; }
+.spot-popup .button.darkblue { background-color: #3F51B5; }
+.spot-popup .button.purple { background-color: #9C27B0; }
+.spot-popup .button.red { background-color: #F44336; }
+.spot-popup .button.orange { background-color: #FF9800; }
+.spot-popup .button.gray { background-color: #607D8B; }
+.spot-popup .button.olive { background-color: #8BC34A; }
+
+.spot-popup .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.spot-popup .amenities,
+.spot-popup .sports,
+.spot-popup .events {
+    margin: 10px 0;
 }

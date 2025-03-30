@@ -53,20 +53,42 @@ header .container {
 }
 
 .main-menu a {
-    color: black;
+    color: #333;
     text-decoration: none;
     font-size: 1rem;
-    transition: color 0.3s ease;
+    font-weight: 500;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .main-menu a:hover {
     color: #0056b3;
 }
 
+.main-menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0056b3;
+    transition: width 0.3s ease;
+}
+
+.main-menu a:hover::after {
+    width: 100%;
+}
+
 .main-menu a.active {
     color: #0056b3;
-    border-bottom: 2px solid #0056b3;
     font-weight: 600;
+}
+
+.main-menu a.active::after {
+    width: 100%;
+    background-color: #0056b3;
 }
 
 .header-right {

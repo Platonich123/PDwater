@@ -264,10 +264,133 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Инициализация карты Leaflet
-    var map = L.map('map').setView([55.7558, 37.6173], 10); // Координаты для центра карты (Москва)
-
-    // Добавление слоя OpenStreetMap
+    const map = L.map('map').setView([55.7558, 37.6173], 10); // Центр Москвы
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '© OpenStreetMap contributors'
     }).addTo(map);
+
+    // Данные о спотах
+    const spots = [
+        {
+            name: "Яхт-клуб \"Ореховая бухта\"",
+            address: "Московская область, городской округ Мытищи, деревня Волынское, Ореховая улица",
+            lat: 55.8789,
+            lon: 37.6543,
+            rating: 4,
+            image: "card/cts.png",
+            amenities: ["Можно детям", "Есть инвентарь"],
+            events: ["соревнования"],
+            sports: ["Моторная тяга", "Весло", "Спец. оборудование"]
+        },
+        {
+            name: "ProYachting",
+            address: "Ленинградское шоссе. 39, стр. 6",
+            lat: 55.8236,
+            lon: 37.4849,
+            rating: 5,
+            image: "card/cv.png",
+            amenities: ["есть инвентарь", "инструктор"],
+            events: ["события"],
+            sports: ["Моторная тяга"]
+        },
+        {
+            name: "Прогулка на парусной яхте",
+            address: "Московская область, г. Подльск, Улица 1 мая, д. 10",
+            lat: 55.5912,
+            lon: 37.3045,
+            rating: 3,
+            image: "card/frs.png",
+            amenities: ["Можно детям", "есть инвентарь", "инструктор"],
+            events: ["соревнования"],
+            sports: ["Спец. оборудование"]
+        },
+        {
+            name: "Прогулка на сапе",
+            address: "г. Москва, ул. Наташкинская улица, ст.1",
+            lat: 55.7558,
+            lon: 37.6173,
+            rating: 2,
+            image: "card/rfg.png",
+            events: ["соревнования"],
+            sports: ["Весло", "Спец. оборудование"]
+        },
+        {
+            name: "Royal Yacht Club",
+            address: "г. Москва, ул. Никольский тупик",
+            lat: 55.7522,
+            lon: 37.6156,
+            rating: 1,
+            image: "card/XXXL.webp",
+            amenities: ["Можно детям", "инструктор"],
+            sports: ["Моторная тяга", "Весло", "Спец. оборудование"]
+        },
+        {
+            name: "Подмосковная Ривьера",
+            address: "г. Москва, Ленинградское шоссе, ст.1",
+            lat: 55.7964,
+            lon: 37.5343,
+            rating: 6,
+            image: "card/xdxx.webp",
+            amenities: ["Можно детям"],
+            events: ["события"],
+            sports: ["Моторная тяга", "Яхта", "Спец. оборудование"]
+        }
+    ];
+
+    // Создание маркеров и всплывающих окон
+    spots.forEach(spot => {
+        const marker = L.marker([spot.lat, spot.lon]).addTo(map);
+        
+        // Создание HTML для всплывающего окна
+        const popupContent = `
+            <div class="spot-popup">
+                <img src="${spot.image}" alt="${spot.name}" style="width: 100%; height: 150px; object-fit: cover;">
+                <h3>${spot.name}</h3>
+                <p>${spot.address}</p>
+                <div class="rating">
+                    ${Array(5).fill().map((_, i) => 
+                        `<span class="star">${i < spot.rating ? '★' : '☆'}</span>`
+                    ).join('')}
+                </div>
+                <div class="amenities">
+                    ${spot.amenities ? spot.amenities.map(amenity => 
+                        `<button class="button ${getButtonColor(amenity)}">${amenity}</button>`
+                    ).join('') : ''}
+                </div>
+                <div class="sports">
+                    ${spot.sports.map(sport => 
+                        `<button class="button ${getButtonColor(sport)}">${sport}</button>`
+                    ).join('')}
+                </div>
+                ${spot.events ? `
+                    <div class="events">
+                        ${spot.events.map(event => 
+                            `<button class="button ${getButtonColor(event)}">${event}</button>`
+                        ).join('')}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+
+        marker.bindPopup(popupContent, {
+            maxWidth: 300,
+            className: 'custom-popup'
+        });
+    });
+
+    // Функция для определения цвета кнопки
+    function getButtonColor(type) {
+        const colors = {
+            'Можно детям': 'green',
+            'Есть инвентарь': 'blue',
+            'инструктор': 'pink',
+            'соревнования': 'darkblue',
+            'события': 'purple',
+            'Моторная тяга': 'red',
+            'Яхта': 'orange',
+            'Весло': 'gray',
+            'Спец. оборудование': 'olive'
+        };
+        return colors[type] || 'default';
+    }
 });
